@@ -10,6 +10,7 @@ const Sidebar = () => {
       >
         Logo
       </Link>
+      <h3 className="py-3 text-center text-xl font-bold">Categories</h3>
     </aside>
   );
 };

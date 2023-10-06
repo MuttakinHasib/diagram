@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "reactflow/dist/style.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
