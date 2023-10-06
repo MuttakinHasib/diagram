@@ -5,9 +5,10 @@ import ReactFlow, { Background, Controls, MiniMap } from "reactflow";
 type Props = {};
 
 const HomePage = (props: Props) => {
+  const proOptions = { hideAttribution: true };
   return (
     <div className="p-5 !h-[calc(100vh-5rem-64px)]">
-      <ReactFlow attributionPosition="top-right" className="border rounded-md">
+      <ReactFlow proOptions={proOptions} className="border rounded-md">
         <Background />
         <Controls />
         <MiniMap zoomable pannable />
