@@ -29,6 +29,7 @@ const Sidebar = () => {
                 <div className="flex flex-col gap-2 p-1 pb-4">
                   {navigation.children.map((child, index) => (
                     <Input
+                      className="bg-white"
                       key={child.name}
                       type="text"
                       name={child.name}
