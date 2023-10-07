@@ -27,14 +27,13 @@ const Sidebar = () => {
 
               <AccordionContent>
                 <div className="flex flex-col gap-2 p-1 pb-4">
-                  {navigation.children.map((child, index) => (
-                    <Input
-                      className="bg-white"
+                  {navigation.children.map((child) => (
+                    <p
+                      className="bg-white flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
                       key={child.name}
-                      type="text"
-                      name={child.name}
-                      placeholder={child.name}
-                    />
+                    >
+                      {child.name}
+                    </p>
                   ))}
                 </div>
               </AccordionContent>
