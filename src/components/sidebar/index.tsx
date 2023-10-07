@@ -27,14 +27,38 @@ const Sidebar = () => {
 
               <AccordionContent>
                 <div className="flex flex-col gap-2 p-1 pb-4">
-                  {navigation.children.map((child) => (
-                    <p
-                      className="bg-white flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
-                      key={child.name}
-                    >
-                      {child.name}
-                    </p>
-                  ))}
+                  {navigation.children.map((child) => {
+                    if (child.children) {
+                      return (
+                        <Accordion key={child.label} type="single" collapsible>
+                          <AccordionItem key={index} value={navigation.label}>
+                            <AccordionTrigger>{child.label}</AccordionTrigger>
+                            <AccordionContent>
+                              <div className="flex flex-col gap-2 p-1 pb-4">
+                                {child.children.map((grandChild) => (
+                                  <p
+                                    className="bg-white flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
+                                    key={grandChild.name}
+                                  >
+                                    {grandChild.name}
+                                  </p>
+                                ))}
+                              </div>
+                            </AccordionContent>
+                          </AccordionItem>
+                        </Accordion>
+                      );
+                    } else {
+                      return (
+                        <p
+                          className="bg-white flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
+                          key={child.name}
+                        >
+                          {child.name}
+                        </p>
+                      );
+                    }
+                  })}
                 </div>
               </AccordionContent>
             </AccordionItem>

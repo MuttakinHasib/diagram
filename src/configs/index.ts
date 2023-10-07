@@ -10,9 +10,10 @@ export const sidebarNavigation = [
   {
     label: "Instrument Selection",
     children: [
-      { name: "Options" },
-      { name: "Index" },
-      { name: "Expiry Date" },
+      {
+        label: "Options",
+        children: [{ name: "Index" }, { name: "Expiry Date" }],
+      },
       { name: "Equity" },
     ],
   },
@@ -21,12 +22,16 @@ export const sidebarNavigation = [
     children: [
       { name: "Strike Size" },
       { name: "Lot Size" },
-      { name: "Strike Length" },
-      { name: "Scan Time" },
-      { name: "PNL Check Frequency" },
-      { name: "Trading Decision" },
-      { name: "Buying" },
-      { name: "Selling" },
+      {
+        label: "Strike Length",
+        children: [
+          { name: "Scan Time" },
+          { name: "PNL Check Frequency" },
+          { name: "Trading Decision" },
+          { name: "Buying" },
+          { name: "Selling" },
+        ],
+      },
     ],
   },
   {
@@ -52,12 +57,16 @@ export const sidebarNavigation = [
       { name: "Cancel Open Order" },
       { name: "Square Off All Positions" },
       { name: "Order Filter" },
-      { name: "Square Positions" },
-      { name: "Price Limit" },
-      { name: "Premium Above" },
-      { name: "Premium Below" },
-      { name: "All Buy" },
-      { name: "All Sell" },
+      {
+        label: "Square Positions",
+        children: [
+          { name: "Price Limit" },
+          { name: "Premium Above" },
+          { name: "Premium Below" },
+          { name: "All Buy" },
+          { name: "All Sell" },
+        ],
+      },
     ],
   },
   {
