@@ -23,7 +23,7 @@ const Node = () => {
   return (
     <React.Fragment>
       <Handle type="target" position={Position.Bottom} />
-      <Card className="w-[350px]">
+      <Card className="w-64">
         <CardHeader>
           <CardTitle>Broker</CardTitle>
         </CardHeader>
