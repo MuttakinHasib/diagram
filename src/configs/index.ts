@@ -1,5 +1,6 @@
 import { BrokerA, BrokerB, BrokerC } from "@/components/nodes/brokers/";
 import { camelCase, flatMap, map, pick } from "lodash";
+import { NodeTypes } from "reactflow";
 
 export const sidebarNavigation = [
   {
@@ -99,7 +100,7 @@ export const sidebarNavigation = [
   // Add more sections and children as needed
 ];
 
-export const generatedNodeTypes: any = Object.assign(
+export const generatedNodeTypes: NodeTypes = Object.assign(
   {},
   ...flatMap(sidebarNavigation, (item) =>
     flatMap(item.children, (child) => {

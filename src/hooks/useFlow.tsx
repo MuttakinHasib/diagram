@@ -6,7 +6,6 @@ import { DragEvent, useCallback, useMemo, useRef, useState } from "react";
 import {
   Edge,
   Node,
-  NodeTypes,
   ReactFlowInstance,
   addEdge,
   useEdgesState,
