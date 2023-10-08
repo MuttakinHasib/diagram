@@ -1,10 +1,13 @@
+import { BrokerA, BrokerB, BrokerC } from "@/components/nodes/brokers/";
+import { camelCase, flatMap, map, pick } from "lodash";
+
 export const sidebarNavigation = [
   {
     label: "Broker Login",
     children: [
-      { name: "Broker A" },
-      { name: "Broker B" },
-      { name: "Broker C" },
+      { name: "Broker A", component: BrokerA },
+      { name: "Broker B", component: BrokerB },
+      { name: "Broker C", component: BrokerC },
     ],
   },
   {
@@ -12,74 +15,102 @@ export const sidebarNavigation = [
     children: [
       {
         label: "Options",
-        children: [{ name: "Index" }, { name: "Expiry Date" }],
+        children: [
+          { name: "Index", component: BrokerA },
+          { name: "Expiry Date", component: BrokerA },
+        ],
       },
-      { name: "Equity" },
+      { name: "Equity", component: BrokerA },
     ],
   },
   {
     label: "Customize Parameter",
     children: [
-      { name: "Strike Size" },
-      { name: "Lot Size" },
+      { name: "Strike Size", component: BrokerA },
+      { name: "Lot Size", component: BrokerA },
       {
         label: "Strike Length",
         children: [
-          { name: "Scan Time" },
-          { name: "PNL Check Frequency" },
-          { name: "Trading Decision" },
-          { name: "Buying" },
-          { name: "Selling" },
+          { name: "Scan Time", component: BrokerA },
+          { name: "PNL Check Frequency", component: BrokerA },
+          { name: "Trading Decision", component: BrokerA },
+          { name: "Buying", component: BrokerA },
+          { name: "Selling", component: BrokerA },
         ],
       },
     ],
   },
   {
     label: "Decision",
-    children: [{ name: "IF_else" }],
+    children: [{ name: "IF_else", component: BrokerA }],
   },
   {
     label: "Loops",
-    children: [{ name: "For Loop" }, { name: "While Loop" }],
+    children: [
+      { name: "For Loop", component: BrokerA },
+      { name: "While Loop", component: BrokerA },
+    ],
   },
   {
     label: "Trading",
     children: [
-      { name: "Instruments" },
-      { name: "Indicators" },
-      { name: "Triggers" },
-      { name: "Trade Legs" },
+      { name: "Instruments", component: BrokerA },
+      { name: "Indicators", component: BrokerA },
+      { name: "Triggers", component: BrokerA },
+      { name: "Trade Legs", component: BrokerA },
     ],
   },
   {
     label: "OMS",
     children: [
-      { name: "Cancel Open Order" },
-      { name: "Square Off All Positions" },
-      { name: "Order Filter" },
+      { name: "Cancel Open Order", component: BrokerA },
+      { name: "Square Off All Positions", component: BrokerA },
+      { name: "Order Filter", component: BrokerA },
       {
         label: "Square Positions",
         children: [
-          { name: "Price Limit" },
-          { name: "Premium Above" },
-          { name: "Premium Below" },
-          { name: "All Buy" },
-          { name: "All Sell" },
+          { name: "Price Limit", component: BrokerA },
+          { name: "Premium Above", component: BrokerA },
+          { name: "Premium Below", component: BrokerA },
+          { name: "All Buy", component: BrokerA },
+          { name: "All Sell", component: BrokerA },
         ],
       },
     ],
   },
   {
     label: "Hedge Buy",
-    children: [{ name: "Premium Max Limit" }, { name: "Quantity" }],
+    children: [
+      { name: "Premium Max Limit", component: BrokerA },
+      { name: "Quantity", component: BrokerA },
+    ],
   },
   {
     label: "RMS",
-    children: [{ name: "PNL" }, { name: "Order Count" }],
+    children: [
+      { name: "PNL", component: BrokerA },
+      { name: "Order Count", component: BrokerA },
+    ],
   },
   {
     label: "Trade Leg",
-    children: [{ name: "Strike Selection" }],
+    children: [{ name: "Strike Selection", component: BrokerA }],
   },
   // Add more sections and children as needed
 ];
+
+export const generatedNodeTypes: any = Object.assign(
+  {},
+  ...flatMap(sidebarNavigation, (item) =>
+    flatMap(item.children, (child) => {
+      if (child.children) {
+        return map(child.children, (grandChild) =>
+          pick(grandChild, ["name", "component"])
+        );
+      }
+      return pick(child, ["name", "component"]);
+    })
+  ).map((node) => ({
+    [camelCase(node.name)!]: node.component,
+  }))
+);

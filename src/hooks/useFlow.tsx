@@ -1,10 +1,12 @@
-import Broker from "@/components/nodes/broker";
+import { generatedNodeTypes } from "@/configs";
 import { initialNodes } from "@/data/node";
+
 import { nanoid } from "nanoid";
 import { DragEvent, useCallback, useMemo, useRef, useState } from "react";
 import {
   Edge,
   Node,
+  NodeTypes,
   ReactFlowInstance,
   addEdge,
   useEdgesState,
@@ -18,7 +20,7 @@ export const useFlow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
-  const nodeTypes = useMemo(() => ({ broker: Broker }), []);
+  const nodeTypes = useMemo(() => generatedNodeTypes, []);
 
   const onConnect = useCallback(
     (params: any) =>
