@@ -10,6 +10,10 @@ import {
 import { Input } from "../ui/input";
 
 const Sidebar = () => {
+  const onDragStart = (event: any, nodeType: any) => {
+    event.dataTransfer.setData("application/reactflow", "broker");
+    event.dataTransfer.effectAllowed = "move";
+  };
   return (
     <aside className="w-72 min-h-screen bg-gray-100">
       <Link
@@ -36,12 +40,16 @@ const Sidebar = () => {
                             <AccordionContent>
                               <div className="flex flex-col gap-2 p-1 pb-4">
                                 {child.children.map((grandChild) => (
-                                  <p
-                                    className="bg-white flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
+                                  <div
+                                    draggable
+                                    onDragStart={(event) =>
+                                      onDragStart(event, "process")
+                                    }
+                                    className="bg-white cursor-grab flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
                                     key={grandChild.name}
                                   >
                                     {grandChild.name}
-                                  </p>
+                                  </div>
                                 ))}
                               </div>
                             </AccordionContent>
@@ -50,12 +58,14 @@ const Sidebar = () => {
                       );
                     } else {
                       return (
-                        <p
-                          className="bg-white flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
+                        <div
+                          draggable
+                          onDragStart={(event) => onDragStart(event, "process")}
+                          className="bg-white cursor-grab flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
                           key={child.name}
                         >
                           {child.name}
-                        </p>
+                        </div>
                       );
                     }
                   })}
