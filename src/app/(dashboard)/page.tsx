@@ -1,5 +1,5 @@
 "use client";
-import Broker from "@/components/node";
+import Broker from "@/components/nodes";
 import { initialNodes } from "@/data/node";
 import React, { useCallback, useMemo } from "react";
 import ReactFlow, {
