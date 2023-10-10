@@ -1,7 +1,12 @@
 "use client";
 
 import React from "react";
-import ReactFlow, { Background, Controls, MiniMap } from "reactflow";
+import ReactFlow, {
+  Background,
+  ConnectionMode,
+  Controls,
+  MiniMap,
+} from "reactflow";
 import { useFlow } from "@/hooks/useFlow";
 import { Input } from "@/components/ui/input";
 import {
@@ -49,6 +54,7 @@ const HomePage = (props: Props) => {
         maxZoom={5}
         minZoom={0.3}
         onInit={setReactFlowInstance}
+        connectionMode={ConnectionMode.Loose}
         fitView
         className="border rounded-md"
       >

@@ -22,10 +22,12 @@ export const useFlow = () => {
   const nodeTypes = useMemo(() => generatedNodeTypes, []);
 
   const onConnect = useCallback(
-    (params: any) =>
+    (params: any) => {
+      console.log({ params });
       setEdges((eds: Edge[]) =>
-        addEdge({ ...params, animated: true, style: { stroke: "#fff" } }, eds)
-      ),
+        addEdge({ ...params, animated: false, style: { stroke: "#fff" } }, eds)
+      );
+    },
     [setEdges]
   );
 

@@ -28,7 +28,7 @@ export interface BrokerProps {
 export const Broker = ({ title, fields }: BrokerProps) => {
   return (
     <React.Fragment>
-      <Handle type="target" position={Position.Bottom} />
+      <Handle type="source" position={Position.Bottom} />
       <Card className="w-64">
         <CardHeader>
           <CardTitle>{title}</CardTitle>
@@ -37,8 +37,18 @@ export const Broker = ({ title, fields }: BrokerProps) => {
           <form>
             <div className="grid w-full items-center gap-4">
               {fields.map((field) => (
-                <div key={field.label} className="flex flex-col space-y-1.5">
+                <div
+                  key={field.label}
+                  className="flex flex-col space-y-1.5 relative"
+                >
                   <Label htmlFor={field.name}>{field.label}</Label>
+                  <Handle
+                    type="source"
+                    isConnectable
+                    id={field.name}
+                    position={Position.Right}
+                    style={{ top: 32, right: -30 }}
+                  />
                   <Select name={field.name}>
                     <SelectTrigger id={field.name}>
                       <SelectValue placeholder="Select" />
@@ -88,6 +98,6 @@ export const BROKER_COMMON_FIELDS: IField[] = [
   },
 ];
 
-export * from './brokerA'
-export * from './brokerB'
-export * from './brokerC'
+export * from "./brokerA";
+export * from "./brokerB";
+export * from "./brokerC";
