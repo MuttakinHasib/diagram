@@ -107,6 +107,8 @@ sidebarNavigation.forEach((navigation) => {
     __dirname,
     `/src/components/nodes/${kebabCase(navigation.label)}`
   );
+  const nodesDirectory = path.join(__dirname, `/src/components/nodes`);
+
   navigation.children.forEach((child) => {
     if (child.children) {
       const childDirectory = `${rootDirectory}/${kebabCase(child.label)}`;
@@ -116,7 +118,10 @@ sidebarNavigation.forEach((navigation) => {
           fs.mkdirSync(file, { recursive: true });
         }
         fs.writeFileSync(file + "/index.tsx", componentCode(grandChild.name));
-        console.log("creating", grandChild.name);
+        fs.appendFileSync(
+          childDirectory + "/index.ts",
+          `export * from "./${kebabCase(grandChild.name)}"\n`
+        );
       });
     } else {
       const file = `${rootDirectory}/${kebabCase(child.name)}`;
@@ -124,9 +129,16 @@ sidebarNavigation.forEach((navigation) => {
         fs.mkdirSync(file, { recursive: true });
       }
       fs.writeFileSync(file + "/index.tsx", componentCode(child.name));
+      fs.appendFileSync(
+        rootDirectory + "/index.ts",
+        `export * from "./${kebabCase(child.name)}"\n`
+      );
       console.log("creating", child.name);
-
-      //
     }
+
+    fs.appendFileSync(
+      nodesDirectory + "/index.ts",
+      `export * from "./${kebabCase(child.label)}"\n`
+    );
   });
 });
