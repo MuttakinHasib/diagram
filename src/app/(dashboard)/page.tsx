@@ -1,11 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import ReactFlow, {
   Background,
   ConnectionMode,
   Controls,
+  Edge,
   MiniMap,
+  addEdge,
+  useEdgesState,
 } from "reactflow";
 import { useFlow } from "@/hooks/useFlow";
 import { Input } from "@/components/ui/input";
@@ -18,11 +21,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import "reactflow/dist/style.css";
+import { nanoid } from "nanoid";
 const proOptions = { hideAttribution: true };
 
 type Props = {};
 
 const HomePage = (props: Props) => {
+  // const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const {
     nodes,
     setNodes,
@@ -38,6 +44,20 @@ const HomePage = (props: Props) => {
     onDragOver,
   } = useFlow();
 
+  // const onConnect = useCallback(
+  //   (params: any) => {
+  //     if (params.source === params.target) return;
+  //     const addNewEdge = {
+  //       id: nanoid(),
+  //       source: params.source,
+  //       target: params.target,
+  //       type: "default",
+  //     };
+  //     setEdges((eds: Edge[]) => addEdge({ ...addNewEdge, ...params }, eds));
+  //   },
+  //   [setEdges]
+  // );
+
   return (
     <div className="p-5 !h-[calc(100vh-5rem-64px)]" ref={reactFlowWrapper}>
       <ReactFlow
@@ -50,7 +70,10 @@ const HomePage = (props: Props) => {
           onConnect,
           onDrop,
           onDragOver,
+          edges,
         }}
+        // onConnect={onConnect}
+        nodesConnectable={true}
         maxZoom={5}
         minZoom={0.3}
         onInit={setReactFlowInstance}

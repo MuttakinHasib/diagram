@@ -21,12 +21,25 @@ export const useFlow = () => {
 
   const nodeTypes = useMemo(() => generatedNodeTypes, []);
 
+  // const onConnect = useCallback(
+  //   (params: any) => {
+  //     console.log({ params });
+  //     setEdges((eds: Edge[]) =>
+  //       addEdge({ ...params, animated: false, style: { stroke: "#fff" } }, eds)
+  //     );
+  //   },
+  //   [setEdges]
+  // );
   const onConnect = useCallback(
     (params: any) => {
-      console.log({ params });
-      setEdges((eds: Edge[]) =>
-        addEdge({ ...params, animated: false, style: { stroke: "#fff" } }, eds)
-      );
+      if (params.source === params.target) return;
+      const addNewEdge = {
+        id: nanoid(),
+        source: params.source,
+        target: params.target,
+        type: "default",
+      };
+      setEdges((eds: Edge[]) => addEdge({ ...addNewEdge, ...params }, eds));
     },
     [setEdges]
   );
