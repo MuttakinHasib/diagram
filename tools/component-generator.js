@@ -91,13 +91,13 @@ export const sidebarNavigation = [
   // Add more sections and children as needed
 ];
 
-const componentCode = (name, title) => {
+const componentCode = (name) => {
   return `
 import React from "react";
-import { NODE_COMMON_FIELDS, NodeLayout } from "../layouts";
+import { NODE_COMMON_FIELDS, NodeLayout } from "@/layouts";
 
 export const ${upperFirst(camelCase(name))} = () => {
-  return <NodeLayout title="${title}" fields={NODE_COMMON_FIELDS} />;
+  return <NodeLayout title="${name}" fields={NODE_COMMON_FIELDS} />;
 }; 
     `;
 };
@@ -115,10 +115,7 @@ sidebarNavigation.forEach((navigation) => {
         if (!fs.existsSync(file)) {
           fs.mkdirSync(file, { recursive: true });
         }
-        fs.writeFileSync(
-          file + "/index.tsx",
-          componentCode(grandChild.name, grandChild.name)
-        );
+        fs.writeFileSync(file + "/index.tsx", componentCode(grandChild.name));
         console.log("creating", grandChild.name);
       });
     } else {
@@ -126,10 +123,7 @@ sidebarNavigation.forEach((navigation) => {
       if (!fs.existsSync(file)) {
         fs.mkdirSync(file, { recursive: true });
       }
-      fs.writeFileSync(
-        file + "/index.tsx",
-        componentCode(child.name, child.name)
-      );
+      fs.writeFileSync(file + "/index.tsx", componentCode(child.name));
       console.log("creating", child.name);
 
       //

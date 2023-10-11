@@ -20,12 +20,12 @@ interface IField {
   options?: string[];
 }
 
-export interface BrokerProps {
+export interface NodeLayoutProps {
   title: string;
   fields: IField[];
 }
 
-export const Broker = ({ title, fields }: BrokerProps) => {
+export const NodeLayout = ({ title, fields }: NodeLayoutProps) => {
   return (
     <React.Fragment>
       <Handle type="source" position={Position.Bottom} />
@@ -71,7 +71,7 @@ export const Broker = ({ title, fields }: BrokerProps) => {
   );
 };
 
-export const BROKER_COMMON_FIELDS: IField[] = [
+export const NODE_COMMON_FIELDS: IField[] = [
   {
     label: "Input Correction",
     name: "input_correction",
@@ -97,7 +97,3 @@ export const BROKER_COMMON_FIELDS: IField[] = [
     options: ["next", "sveltekit", "astro", "nuxt"],
   },
 ];
-
-export * from "./brokerA";
-export * from "./brokerB";
-export * from "./brokerC";
