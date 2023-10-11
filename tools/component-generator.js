@@ -112,17 +112,25 @@ sidebarNavigation.forEach((navigation) => {
   navigation.children.forEach((child) => {
     if (child.children) {
       const childDirectory = `${rootDirectory}/${kebabCase(child.label)}`;
+
       child.children.forEach((grandChild) => {
         const file = `${childDirectory}/${kebabCase(grandChild.name)}`;
         if (!fs.existsSync(file)) {
           fs.mkdirSync(file, { recursive: true });
         }
+
         fs.writeFileSync(file + "/index.tsx", componentCode(grandChild.name));
         fs.appendFileSync(
           childDirectory + "/index.ts",
           `export * from "./${kebabCase(grandChild.name)}"\n`
         );
       });
+      if (child.label) {
+        fs.appendFileSync(
+          rootDirectory + "/index.ts",
+          `export * from "./${kebabCase(child.label)}"\n`
+        );
+      }
     } else {
       const file = `${rootDirectory}/${kebabCase(child.name)}`;
       if (!fs.existsSync(file)) {
@@ -135,10 +143,10 @@ sidebarNavigation.forEach((navigation) => {
       );
       console.log("creating", child.name);
     }
-
-    fs.appendFileSync(
-      nodesDirectory + "/index.ts",
-      `export * from "./${kebabCase(child.label)}"\n`
-    );
   });
+
+  fs.appendFileSync(
+    nodesDirectory + "/index.ts",
+    `export * from "./${kebabCase(navigation.label)}"\n`
+  );
 });
