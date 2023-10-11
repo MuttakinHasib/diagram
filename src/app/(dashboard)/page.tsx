@@ -44,20 +44,6 @@ const HomePage = (props: Props) => {
     onDragOver,
   } = useFlow();
 
-  // const onConnect = useCallback(
-  //   (params: any) => {
-  //     if (params.source === params.target) return;
-  //     const addNewEdge = {
-  //       id: nanoid(),
-  //       source: params.source,
-  //       target: params.target,
-  //       type: "default",
-  //     };
-  //     setEdges((eds: Edge[]) => addEdge({ ...addNewEdge, ...params }, eds));
-  //   },
-  //   [setEdges]
-  // );
-
   return (
     <div className="p-5 !h-[calc(100vh-5rem-64px)]" ref={reactFlowWrapper}>
       <ReactFlow

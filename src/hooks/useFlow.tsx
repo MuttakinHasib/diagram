@@ -21,15 +21,6 @@ export const useFlow = () => {
 
   const nodeTypes = useMemo(() => generatedNodeTypes, []);
 
-  // const onConnect = useCallback(
-  //   (params: any) => {
-  //     console.log({ params });
-  //     setEdges((eds: Edge[]) =>
-  //       addEdge({ ...params, animated: false, style: { stroke: "#fff" } }, eds)
-  //     );
-  //   },
-  //   [setEdges]
-  // );
   const onConnect = useCallback(
     (params: any) => {
       if (params.source === params.target) return;
