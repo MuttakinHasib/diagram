@@ -1,8 +1,8 @@
 
 import React from "react";
 import { NODE_COMMON_FIELDS, NodeLayout } from "@/layouts";
+import { Node } from "reactflow";
 
-export const PremiumAbove = () => {
-  return <NodeLayout title="Premium Above" fields={NODE_COMMON_FIELDS} />;
-}; 
-    
+export const PremiumAbove = (props: Node) => {
+  return <NodeLayout title="Premium Above" nodeProps={props} fields={NODE_COMMON_FIELDS} />;
+};

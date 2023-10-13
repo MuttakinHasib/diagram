@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Handle, Position } from "reactflow";
+import { Handle, Node, Position } from "reactflow";
 
 interface IField {
   label: string;
@@ -23,7 +23,7 @@ interface IField {
 export interface NodeLayoutProps {
   title: string;
   fields: IField[];
-  nodeProps?: any;
+  nodeProps?: Node;
 }
 
 export const NodeLayout = (props: NodeLayoutProps) => {

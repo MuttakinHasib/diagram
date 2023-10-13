@@ -95,11 +95,12 @@ const componentCode = (name) => {
   return `
 import React from "react";
 import { NODE_COMMON_FIELDS, NodeLayout } from "@/layouts";
+import { Node } from "reactflow";
 
-export const ${upperFirst(camelCase(name))} = () => {
-  return <NodeLayout title="${name}" fields={NODE_COMMON_FIELDS} />;
-}; 
-    `;
+export const ${upperFirst(camelCase(name))} = (props: Node) => {
+  return <NodeLayout title="${name}" nodeProps={props} fields={NODE_COMMON_FIELDS} />;
+};
+`;
 };
 
 sidebarNavigation.forEach((navigation) => {
