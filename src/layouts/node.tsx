@@ -23,15 +23,17 @@ interface IField {
 export interface NodeLayoutProps {
   title: string;
   fields: IField[];
+  nodeProps?: any;
 }
 
-export const NodeLayout = ({ title, fields }: NodeLayoutProps) => {
+export const NodeLayout = (props: NodeLayoutProps) => {
+  const { nodeProps, fields } = props;
   return (
     <React.Fragment>
       <Handle type="source" position={Position.Bottom} />
       <Card className="w-64">
         <CardHeader>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle>{nodeProps?.data?.nodeLabel}</CardTitle>
         </CardHeader>
         <CardContent>
           <form>

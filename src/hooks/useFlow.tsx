@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import { DragEvent, useCallback, useMemo, useRef, useState } from "react";
 import {
   Edge,
+  MarkerType,
   Node,
   ReactFlowInstance,
   addEdge,
@@ -20,6 +21,7 @@ export const useFlow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const nodeTypes = useMemo(() => generatedNodeTypes, []);
+  // console.log({ nodeTypes });
 
   const onConnect = useCallback(
     (params: any) => {
@@ -29,6 +31,11 @@ export const useFlow = () => {
         source: params.source,
         target: params.target,
         type: "default",
+        arrowHeadType: "arrow",
+        style: { stroke: "black", strokeWidth: "1.3" },
+        labelBgBorderRadius: 4,
+        markerStart: { type: MarkerType.Arrow },
+        markerEnd: { type: MarkerType.ArrowClosed, color: "black" },
       };
       setEdges((eds: Edge[]) => addEdge({ ...addNewEdge, ...params }, eds));
     },
@@ -42,7 +49,10 @@ export const useFlow = () => {
       const reactFlowBounds =
         reactFlowWrapper?.current?.getBoundingClientRect();
       const type = event.dataTransfer.getData("application/reactflow");
-
+      const nodeLabel = event.dataTransfer.getData(
+        "application/reactflow/nodeLabel"
+      );
+      console.log({ nodeLabel }, "from drop");
       if (typeof type === "undefined" || !type || !reactFlowBounds) {
         return;
       }
@@ -58,9 +68,9 @@ export const useFlow = () => {
         id: nanoid(),
         type,
         position,
-        data: { label: `${type} node` },
+        data: { nodeLabel },
       };
-
+      console.log({ newNode });
       setNodes((nds: Node[]) => nds.concat(newNode));
     },
     [reactFlowInstance, setNodes]

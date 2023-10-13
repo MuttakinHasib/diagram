@@ -10,8 +10,13 @@ import {
 } from "../ui/accordion";
 
 const Sidebar = () => {
-  const onDragStart = (event: DragEvent<HTMLDivElement>, nodeType: string) => {
+  const onDragStart = (
+    event: DragEvent<HTMLDivElement>,
+    nodeType: string,
+    nodeLabel: string
+  ) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
+    event.dataTransfer.setData("application/reactflow/nodeLabel", nodeLabel);
     event.dataTransfer.effectAllowed = "move";
   };
   return (
@@ -45,7 +50,8 @@ const Sidebar = () => {
                                     onDragStart={(event) =>
                                       onDragStart(
                                         event,
-                                        camelCase(grandChild.name)
+                                        camelCase(grandChild.name),
+                                        grandChild.name
                                       )
                                     }
                                     className="bg-white cursor-grab flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
@@ -64,7 +70,11 @@ const Sidebar = () => {
                         <div
                           draggable
                           onDragStart={(event) =>
-                            onDragStart(event, camelCase(child.name))
+                            onDragStart(
+                              event,
+                              camelCase(child.name),
+                              child.name
+                            )
                           }
                           className="bg-white cursor-grab flex w-full rounded-md border border-input px-3 py-2 text-sm shadow-sm transition-colors"
                           key={child.name}

@@ -1,14 +1,11 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React from "react";
 import ReactFlow, {
   Background,
   ConnectionMode,
   Controls,
-  Edge,
   MiniMap,
-  addEdge,
-  useEdgesState,
 } from "reactflow";
 import { useFlow } from "@/hooks/useFlow";
 import { Input } from "@/components/ui/input";
@@ -22,20 +19,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import "reactflow/dist/style.css";
-import { nanoid } from "nanoid";
 const proOptions = { hideAttribution: true };
 
 type Props = {};
 
 const HomePage = (props: Props) => {
-  // const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const {
     nodes,
-    setNodes,
     nodeTypes,
     onNodesChange,
     edges,
-    setEdges,
     onEdgesChange,
     onConnect,
     reactFlowWrapper,
@@ -58,7 +51,6 @@ const HomePage = (props: Props) => {
           onDragOver,
           edges,
         }}
-        // onConnect={onConnect}
         nodesConnectable={true}
         maxZoom={5}
         minZoom={0.3}
