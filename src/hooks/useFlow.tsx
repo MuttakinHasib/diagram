@@ -26,6 +26,7 @@ export const useFlow = () => {
   const onConnect = useCallback(
     (params: any) => {
       if (params.source === params.target) return;
+
       const addNewEdge = {
         id: nanoid(),
         source: params.source,
@@ -52,7 +53,7 @@ export const useFlow = () => {
       const nodeLabel = event.dataTransfer.getData(
         "application/reactflow/nodeLabel"
       );
-      console.log({ nodeLabel }, "from drop");
+
       if (typeof type === "undefined" || !type || !reactFlowBounds) {
         return;
       }
@@ -70,7 +71,7 @@ export const useFlow = () => {
         position,
         data: { nodeLabel },
       };
-      console.log({ newNode });
+
       setNodes((nds: Node[]) => nds.concat(newNode));
     },
     [reactFlowInstance, setNodes]

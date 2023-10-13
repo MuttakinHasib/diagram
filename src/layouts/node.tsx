@@ -31,11 +31,11 @@ export const NodeLayout = (props: NodeLayoutProps) => {
   return (
     <React.Fragment>
       <Handle type="source" position={Position.Bottom} />
-      <Card className="w-64">
-        <CardHeader>
+      <Card className="w-64 divide-y-2 border-2 border-blue-800 shadow-xl">
+        <CardHeader className="py-3">
           <CardTitle>{nodeProps?.data?.nodeLabel}</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-3">
           <form>
             <div className="grid w-full items-center gap-4">
               {fields.map((field) => (
